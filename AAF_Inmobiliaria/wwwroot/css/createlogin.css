@@ -1,0 +1,66 @@
+:root {
+  --colorAcento: #CD853F;
+}
+.crearUsuario {
+  width: 100%;
+  margin-bottom: 0.1rem;
+}
+.tbFlotante {
+  padding: 1.8rem 1rem 0.6rem;
+  font-size: 1rem;
+}
+.lblFlotante::before {
+  content: attr(data-content);
+  display: inline-block;
+  transform-origin: left top;
+  transition: transform 0.4s ease;
+  left: 1rem;
+  position: relative;
+}
+.tbFlotante:placeholder-shown + .lblFlotante::before {
+  transform: translate3d(0, -2.0rem, 0) scale3d(1, 1, 1);
+}
+
+.lblFlotante::before, .tbFlotante:focus + .lblFlotante::before {
+  transform: translate3d(0, -3.58rem, 0) scale3d(0.82, 0.82, 1);
+}
+
+.tbFlotante:focus + .lblFlotante::before {
+  color: var(--colorAcento);
+}
+
+/* ---------------------------------------------- */
+/* --  Codepen styles & resets - not required  -- */
+/* ---------------------------------------------- */
+
+
+/* apply a natural box layout model to all elements, but allowing components to change */
+
+.button {
+  background: var(--colorAcento);
+  color: #fff;
+  display: block;
+  width: 100%;
+  padding: 1rem 2rem;
+  font-weight: 600;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.form {
+    width: 30%;  
+    background-color: #fff;
+    padding: 1rem 1rem 1rem;
+    box-shadow: 2px 2px 16px 3px rgba(0, 0, 0, 0.4);
+}
+
+.h3-login{
+    text-align: center;
+
+}
+input[type=text],input[type=password] {
+    user-select:text; 
+}
+

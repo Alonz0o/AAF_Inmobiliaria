@@ -1,0 +1,30 @@
+﻿@charset "utf-8";
+/* CSS Document */
+*{
+	font-size:13px;
+	font-family:roboto;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+     user-select: none;   
+}
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+.cuerpo{
+    background-image:url("../img/backgroundCanito.jpg");  
+}
+.logo{
+    width: 140px;
+}
+.pie-redes i{
+    font-size:20px;
+}
+.indexes{
+	margin-top:10px;
+}
+.tablasC{
+    border-radius: 5px;
+}

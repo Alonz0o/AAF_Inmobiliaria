@@ -1,0 +1,55 @@
+﻿@model AAF_Inmobiliaria.Models.Propietario
+
+@{
+    ViewData["Title"] = "Crear Usuario";
+}
+@*-------------------------------------------*@
+<div class="form indexes container-fluid">
+    <nav class="indexes navbar navbar-light bg-light">
+        <a class="navbar-brand">Crear un Propietario</a>
+        <form class="form-inline">
+            <span class="input-group-text, btn btn-outline-warning" data-toggle="tooltip" data-placement="bottom" title="Crea un propietario con sus atributos">Creando un nuevo propietario</span>
+        </form>
+    </nav>
+    <form class="indexes" asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="crearUsuario">
+            <div class="form-group">
+                <input asp-for="Nombre" class="form-control tbFlotante" type="text" placeholder="" minlength="3" maxlength="20" required pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ]{2,48}" title="Ingrese un Nombre valido">
+                <label class="lblFlotante" data-content="Nombre"></label>
+                <input asp-for="Apellido" class="form-control tbFlotante" type="text" placeholder="" minlength="3" maxlength="20" required pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ]{2,48}" title="Ingrese un Apellido valido">
+                <label class="lblFlotante" data-content="Apellido"></label>
+                <input asp-for="Dni" class="form-control tbFlotante" type="text" placeholder="" minlength="3" maxlength="8" required pattern="[-+]?[0-9]*[.,]?[0-9]+" title="Ingrese un DNI valido">
+                <label class="lblFlotante" data-content="Dni"></label>
+                <input asp-for="Telefono" class="form-control tbFlotante" type="text" placeholder="" minlength="3" maxlength="11" required pattern="[-+]?[0-9]*[.,]?[0-9]+" title="Ingrese Telefono valido">
+                <label class="lblFlotante" data-content="Telefono"></label>
+                <input asp-for="Email" class="form-control tbFlotante" type="email" placeholder="" minlength="5" maxlength="30" required>
+                <label class="lblFlotante" data-content="E-Mail"></label>
+                <input asp-for="Clave" class="form-control tbFlotante" type="password" placeholder="" minlength="5" maxlength="20" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" title="La Contraseña debe contener al menos una letra en MAYÚSCULA y un NUMERO">
+                <label class="lblFlotante" data-content="Contraseña"></label>
+                <div class="row">
+                    <label class="col-form-label col-sm-2 pt-0">Genero:</label>
+                    <div class="col-sm-15">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" class="custom-control-input" id="gHombre" name="rbSexo" @*required*@>
+                            <label class="custom-control-label" for="gHombre">Hombre</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" class="custom-control-input" id="gMujer" name="rbSexo" @*required*@>
+                            <label class="custom-control-label" for="gMujer">Mujer</label>
+                            <div class="invalid-feedback">Eres Hombre o Mujer?</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <button type="submit" value="Create" name="registro" class="button">Registrarse</button>
+            <a asp-action="Index">Volver a la lista</a>
+        </div>
+    </form>
+</div>
+@*-------------------------------------------*@
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
