@@ -6,9 +6,9 @@
 @*-------------------------------------------*@
 <div class="form indexes container-fluid">
     <nav class="indexes navbar navbar-light bg-light">
-        <a class="navbar-brand">Crear un Propietario</a>
+        <a class="navbar-brand">Crear Propietario</a>
         <form class="form-inline">
-            <span class="input-group-text, btn btn-outline-warning" data-toggle="tooltip" data-placement="bottom" title="Crea un propietario con sus atributos">Creando un nuevo propietario</span>
+            <span class="input-group-text, btn btn-outline-warning" data-toggle="tooltip" data-placement="bottom" title="Crea un propietario con sus atributos">Estas creando un nuevo propietario</span>
         </form>
     </nav>
     <form class="indexes" asp-action="Create">
@@ -42,9 +42,10 @@
                     </div>
                 </div>
             </div>
+            <button type="submit" value="Create" name="registro" class="button  btn-lg">Registrarse</button>
             <hr>
-            <button type="submit" value="Create" name="registro" class="button">Registrarse</button>
-            <a asp-action="Index">Volver a la lista</a>
+
+            <a class="button btn btn-success btn-sm" asp-action="Index">Volver a la lista</a>
         </div>
     </form>
 </div>

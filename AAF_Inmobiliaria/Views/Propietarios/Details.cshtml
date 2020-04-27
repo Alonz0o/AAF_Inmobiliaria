@@ -1,60 +1,74 @@
 ﻿@model AAF_Inmobiliaria.Models.Propietario
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalles del Propietario";
 }
 
-<h1>Details</h1>
+@*-------------------------------------------*@
+<div class="form mt-5 container-fluid">
+    <nav class="mt-4 navbar navbar-light bg-light">
+        <a class="navbar-brand">Detalles del Propietario</a>
+        <form class="form-inline">
+            <span class="input-group-text, btn btn-outline-warning" data-toggle="tooltip" data-placement="bottom" title="Edita dicho un propietario">Estas viendo detalles de un propietario</span>
+            <div class="input-group-append ml-1">
+				<a class="btn btn-outline-danger ml-1" asp-action="Create"> <i class="fas fa-minus"></i> </a>
+				<a class="btn btn-outline-success ml-1" asp-action="Create"> <i class="fas fa-pencil-alt"></i> </a>
+			</div>
+        </form>
+    </nav>
+    <form class="indexes">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="crearUsuario">
+            <div class="form-group">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">ID del Propietario</span>
+                    </div>
+                    <input asp-for="PropietarioId" type="text" class="form-control" disabled>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Nombre del Propietario</span>
+                    </div>
+                    <input asp-for="Nombre" type="text" class="form-control" disabled>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Apellido del Propietario</span>
+                    </div>
+                    <input asp-for="Apellido" type="text" class="form-control" disabled>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Dni del Propietario</span>
+                    </div>
+                    <input asp-for="Dni" type="text" class="form-control" disabled>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Telefono del Propietario</span>
+                    </div>
+                    <input asp-for="Telefono" type="text" class="form-control" disabled>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Email del Propietario</span>
+                    </div>
+                    <input asp-for="Email" type="text" class="form-control" disabled>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Clave del Propietario</span>
+                    </div>
+                    <input asp-for="Clave" type="text" class="form-control" disabled>
+                </div>
+            </div>
+            
+            <hr>
 
-<div>
-    <h4>Propietario</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PropietarioId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PropietarioId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nombre)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Apellido)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Apellido)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Dni)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Dni)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Telefono)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Telefono)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Clave)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Clave)
-        </dd>
-    </dl>
+            @*<a asp-action="Edit" asp-route-id="PropietarioId" class="button btn btn-warning btn-sm">Editar</a>*@
+            <a class="button btn btn-success btn-sm mt-1" asp-action="Index">Volver a la lista</a>
+        </div>
+    </form>
 </div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
-</div>
+@*-------------------------------------------*@

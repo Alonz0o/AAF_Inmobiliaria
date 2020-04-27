@@ -1,0 +1,52 @@
+﻿@model AAF_Inmobiliaria.Models.Inmueble
+
+@{
+    ViewData["Title"] = "Crear Inmueble";
+}  
+@*-------------------------------------------*@
+<div class="form mt-5 container-fluid">
+    <nav class="mt-4 navbar navbar-light bg-light">
+        <a class="navbar-brand">Crear Inmueble</a>
+        <form class="form-inline">
+            <span class="input-group-text, btn btn-outline-warning" data-toggle="tooltip" data-placement="bottom" title="Crea un inmueble con sus atributos">Estas creando un nuevo inmueble</span>
+        </form>
+    </nav>
+    <form class="mt-4" asp-action="Create" >
+        <div class="crearUsuario">
+            <div class="form-group">
+                <input asp-for="Direccion" class="form-control tbFlotante" type="text" placeholder="" minlength="3" maxlength="20" required pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ]{2,48}">
+                <label class="lblFlotante" data-content="Direccion"></label>
+                <input asp-for="Ambientes" class="form-control tbFlotante" type="number" placeholder="" min="0" required pattern="[-+]?[0-9]*[.,]?[0-9]+">
+                <label class="lblFlotante" data-content="Ambientes"></label>
+                <input asp-for="Superficie" class="form-control tbFlotante" type="number" placeholder="" min="0" required pattern="[-+]?[0-9]*[.,]?[0-9]+">
+                <label class="lblFlotante" data-content="Superficie"></label>
+                <input asp-for="Latitud" class="form-control tbFlotante" type="number" placeholder="" min="0" required pattern="[-+]?[0-9]*[.,]?[0-9]+">
+                <label class="lblFlotante" data-content="Latitud"></label>
+                <input asp-for="Longitud" class="form-control tbFlotante" type="number" placeholder="" min="0" required pattern="[-+]?[0-9]*[.,]?[0-9]+">
+                <label class="lblFlotante" data-content="Longitud"></label>
+                <div class="row">
+                    <label class="col-form-label col-sm-2 pt-0">Disponibilidad:</label>
+                    <div>
+                        <div class="custom-control custom-checkbox">
+                            <input class="custom-control-input" id="chPublicado" asp-for="EstaPublicado">
+                            <label class="custom-control-label" for="chPublicado">Publicación</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <input class="custom-control-input" id="chHabilitado" asp-for="EstaHabilitado">
+                            <label class="custom-control-label" for="chHabilitado">Habilitación</label>
+                            <div class="invalid-feedback">Eres Hombre o Mujer?</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" value="Create" name="registro" class="button  btn-lg">Registrarse</button>
+            <hr>
+            <a class="button btn btn-success btn-sm" asp-action="Index">Volver a la lista</a>
+        </div>
+    </form>
+</div>
+@*-------------------------------------------*@
+
+@*@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}*@

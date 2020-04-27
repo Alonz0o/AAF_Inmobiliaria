@@ -46,7 +46,6 @@
   font-size: 1.25rem;
   text-transform: uppercase;
   letter-spacing: 1px;
-  cursor: pointer;
 }
 
 .form {
@@ -61,6 +60,12 @@
 
 }
 input[type=text],input[type=password] {
+    user-select:text; 
+}
+input[type=text],input[type=email] {
+    user-select:text; 
+}
+input[type=text],input[type=number] {
     user-select:text; 
 }
 

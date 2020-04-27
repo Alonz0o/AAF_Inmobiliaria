@@ -64,8 +64,8 @@ namespace AAF_Inmobiliaria.Models
             int res = -1;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string sql = $"UPDATE Inquilinos SET Nombre=@nombre, Apellido=@apellido, Dni=@dni, Telefono=@telefono, Email=@email" +
-                    $"WHERE InquilinoId = @id";
+                string sql = $"UPDATE Inquilinos SET Nombre=@nombre, Apellido=@apellido, Dni=@dni, Telefono=@telefono, Email=@email, EstaPublicado=@estaPublicado, EstaHabilitado=@estaHabilitado" +
+                    $" WHERE InquilinoId = @id";
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
                     command.CommandType = CommandType.Text;
@@ -74,6 +74,8 @@ namespace AAF_Inmobiliaria.Models
                     command.Parameters.AddWithValue("@dni", i.Dni);
                     command.Parameters.AddWithValue("@telefono", i.Telefono);
                     command.Parameters.AddWithValue("@email", i.Email);
+                    command.Parameters.AddWithValue("@estaPublicado", i.EstaPublicado);
+                    command.Parameters.AddWithValue("@estaHabilitado", i.EstaHabilitado);
                     command.Parameters.AddWithValue("@id", i.InquilinoId);
                     connection.Open();
                     res = command.ExecuteNonQuery();

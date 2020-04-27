@@ -1,0 +1,219 @@
+﻿@model IEnumerable<AAF_Inmobiliaria.Models.Inmueble>
+
+@{
+    ViewData["Title"] = "Inicio Inmueble";
+}
+    <div class="form mt-5 container-fluid">
+        <nav class="mt-4 navbar navbar-light bg-light">
+            <a class="navbar-brand text-info">Inmuebles Actuales</a>
+            <form class="form-inline">
+                <span class="btn btn-outline-warning">Crear un nuevo inmueble <i class="far fa-hand-point-right"> </i></span>
+                <div class="input-group-append ml-1">
+                    <a class="btn btn-outline-success ml-1" asp-action="Create" data-toggle="tooltip" data-placement="top" title="Crear un inmuble con sus atributos"> <i class="fas fa-plus"></i> </a>
+                </div>
+            </form>
+        </nav>
+        <section id="destinations">
+            <!-- Inmueble inicio fila(row) -->
+            <div class="row scrollspy-example">
+                <!-- Columna inicio inmueble -->
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-6 col-lg-3">
+                        <!--Insetar inmueble-->
+                        <div class="card card-personal mb-4">
+                            <!--Inmueble imagen-->
+                            <div class="view overlay">
+                                <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/49.jpg" alt="Card image cap">
+                                <a href="#!">
+                                    <div class="mask rgba-white-slight"></div>
+                                </a>
+                            </div>
+                            <!--Inmueble imagen-->
+                            <!--Inmueble contenido-->
+                            @if (item.EstaPublicado == true)
+                            {
+                        <div class="dropdown">
+                            <a class="btn btn-success dropdown-toggle w-100" href="#" role="button" id="dropdownMenuLink"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                @Html.DisplayFor(modelItem => item.Direccion)
+                            </a>
+                            <div class="dropdown-menu w-100 scrollspy-example">
+                                <form class="px-4 py-3">
+                                    <div class="form-group">
+                                        <p class="grey-text mt-2 font-small">
+                                            Clasificacion:
+                                            <!--Review-->
+                                            <i class="fas fa-star blue-text"> </i>
+                                            <i class="fas fa-star blue-text"> </i>
+                                            <i class="fas fa-star blue-text"> </i>
+                                            <i class="fas fa-star blue-text"> </i>
+                                            <i class="fas fa-star blue-text"> </i>
+                                        </p>
+                                    </div>
+                                    <div class="form-group">
+                                        <p class="grey-text mt-2 font-small">
+                                            Numero de ambiente:
+                                            <strong class="blue-text">@Html.DisplayFor(modelItem => item.Ambientes)</strong>
+                                        </p>
+                                    </div>
+                                    <div class="form-group">
+                                        <p class="grey-text mt-2 font-small">
+                                            Superficie:
+                                            <strong class="blue-text"> @Html.DisplayFor(modelItem => item.Superficie)</strong>
+                                        </p>
+                                    </div>
+                                    <div class="form-group">
+                                        <p class="grey-text mt-2 font-small">
+                                            Latitud:
+                                            <strong class="blue-text"> @Html.DisplayFor(modelItem => item.Latitud) <i class="fas fa-grip-lines-vertical"></i> </strong>
+                                            Longitud:
+                                            <strong class="blue-text"> @Html.DisplayFor(modelItem => item.Longitud) </strong>
+                                        </p>
+                                    </div>
+                                    <div class="form-group">
+                                        <p class="grey-text mt-2 font-small">
+                                            Superficie:
+                                            <strong class="blue-text"> @Html.DisplayFor(modelItem => item.Superficie)</strong>
+                                        </p>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <p class="grey-text mt-2 font-small">
+                                            Publicado:
+                                            <strong class="blue-text"> @Html.DisplayFor(modelItem => item.EstaPublicado) <i class="fas fa-grip-lines-vertical"></i></strong>
+                                            Habilitado:
+                                            <strong class="blue-text"> @Html.DisplayFor(modelItem => item.EstaHabilitado)</strong>
+                                        </p>
+                                    </div>
+                                    <div class="form-group">
+                                        <p class="grey-text mt-2 font-small">
+                                            Precio:
+                                            <strong class="blue-text"> $450 Pesos</strong>
+                                        </p>
+                                    </div>
+                                    <div class="form-group">
+                                        <p class="grey-text mt-2 font-small">
+                                            Espacio:
+                                            <strong class="blue-text"> 2 Personas</strong>
+                                        </p>
+                                    </div>
+                                    <div class="form-group">
+                                        <p class="grey-text mt-2 font-small">
+                                            Fecha:
+                                            <strong class="blue-text"> 2/2/2020 </strong>
+                                        </p>
+                                    </div>
+                                </form>
+                                <hr />
+                                <a class="btn btn-success ml-4 col-md-10" asp-controller="Inquilinos" asp-action="Index"> Agregar Inquilino <i class="fas fa-user-plus"></i> </a>
+                                <hr />
+
+                                <a asp-action="Edit" asp-route-id="@item.InmuebleId" class="dropdown-item btn">Editar</a>
+                                <a asp-action="Details" asp-route-id="@item.InmuebleId" class="dropdown-item btn w-100">Detalles</a>
+                                <a asp-action="Delete" asp-route-id="@item.InmuebleId" class="dropdown-item btn w-100">Eliminar</a>
+                                <hr />
+                            </div>
+                        </div>
+                            }
+                            else
+                            {
+                                
+                                <div class="dropdown">
+                                    <a class="btn btn-danger dropdown-toggle w-100" href="#" role="button" id="dropdownMenuLink"
+                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        @Html.DisplayFor(modelItem => item.Direccion)
+                                    </a>
+                                    <div class="dropdown-menu w-100 scrollspy-example">
+                                        <form class="px-4 py-3">
+                                            <div class="form-group">
+                                                <p class="grey-text mt-2 font-small">
+                                                    Clasificacion:
+                                                    <!--Review-->
+                                                    <i class="fas fa-star blue-text"> </i>
+                                                    <i class="fas fa-star blue-text"> </i>
+                                                    <i class="fas fa-star blue-text"> </i>
+                                                    <i class="fas fa-star blue-text"> </i>
+                                                    <i class="fas fa-star blue-text"> </i>
+                                                </p>
+                                            </div>
+                                            <div class="form-group">
+                                                <p class="grey-text mt-2 font-small">
+                                                    Numero de ambiente:
+                                                    <strong class="blue-text">@Html.DisplayFor(modelItem => item.Ambientes)</strong>
+                                                </p>
+                                            </div>
+                                            <div class="form-group">
+                                                <p class="grey-text mt-2 font-small">
+                                                    Superficie:
+                                                    <strong class="blue-text"> @Html.DisplayFor(modelItem => item.Superficie)</strong>
+                                                </p>
+                                            </div>
+                                            <div class="form-group">
+                                                <p class="grey-text mt-2 font-small">
+                                                    Latitud:
+                                                    <strong class="blue-text"> @Html.DisplayFor(modelItem => item.Latitud) <i class="fas fa-grip-lines-vertical"></i> </strong>
+                                                    Longitud:
+                                                    <strong class="blue-text"> @Html.DisplayFor(modelItem => item.Longitud) </strong>
+                                                </p>
+                                            </div>
+                                            <div class="form-group">
+                                                <p class="grey-text mt-2 font-small">
+                                                    Superficie:
+                                                    <strong class="blue-text"> @Html.DisplayFor(modelItem => item.Superficie)</strong>
+                                                </p>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <p class="grey-text mt-2 font-small">
+                                                    Publicado:
+                                                    <strong class="blue-text"> @Html.DisplayFor(modelItem => item.EstaPublicado) <i class="fas fa-grip-lines-vertical"></i></strong>
+                                                    Habilitado:
+                                                    <strong class="blue-text"> @Html.DisplayFor(modelItem => item.EstaHabilitado)</strong>
+                                                </p>
+                                            </div>
+                                            <div class="form-group">
+                                                <p class="grey-text mt-2 font-small">
+                                                    Precio:
+                                                    <strong class="blue-text"> $450 Pesos</strong>
+                                                </p>
+                                            </div>
+                                            <div class="form-group">
+                                                <p class="grey-text mt-2 font-small">
+                                                    Espacio:
+                                                    <strong class="blue-text"> 2 Personas</strong>
+                                                </p>
+                                            </div>
+                                            <div class="form-group">
+                                                <p class="grey-text mt-2 font-small">
+                                                    Fecha:
+                                                    <strong class="blue-text"> 2/2/2020 </strong>
+                                                </p>
+                                            </div>
+                                        </form>
+                                        <hr />
+                                        <a class="btn btn-success ml-4 col-md-10" asp-controller="Inquilinos" asp-action="Index"> Agregar Inquilino <i class="fas fa-user-plus"></i> </a>
+                                        <hr />
+
+                                        <a asp-action="Edit" asp-route-id="@item.InmuebleId" class="dropdown-item btn">Editar</a>
+                                        <a asp-action="Details" asp-route-id="@item.InmuebleId" class="dropdown-item btn w-100">Detalles</a>
+                                        <a asp-action="Delete" asp-route-id="@item.InmuebleId" class="dropdown-item btn w-100">Eliminar</a>
+                                        <hr />
+                                    </div>
+                                </div>
+                            }
+
+                            <!--Inmueble contenido-->
+
+                        </div>
+                        <!--Insetar inmueble-->
+
+
+                    </div>
+                } <!--Insetar inmueble-->
+            </div>
+            <!-- Inmueble cierre fila(row) -->
+        </section>
+    </div>   
+
+

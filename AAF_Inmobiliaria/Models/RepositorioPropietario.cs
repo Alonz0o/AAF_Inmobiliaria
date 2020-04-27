@@ -23,8 +23,8 @@ namespace AAF_Inmobiliaria.Models
             int res = -1;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string sql = $"INSERT INTO Propietarios (Nombre, Apellido, Dni, Telefono, Email, Clave) " +
-                    $"VALUES (@nombre, @apellido, @dni, @telefono, @email, @clave);" +
+                string sql = $"INSERT INTO Propietarios (Nombre, Apellido, Dni, Telefono, Email, Clave, Rol) " +
+                    $"VALUES (@nombre, @apellido, @dni, @telefono, @email, @clave, @rol);" +
                     $"SELECT SCOPE_IDENTITY();";//devuelve el id insertado
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
@@ -35,6 +35,7 @@ namespace AAF_Inmobiliaria.Models
                     command.Parameters.AddWithValue("@telefono", p.Telefono);
                     command.Parameters.AddWithValue("@email", p.Email);
                     command.Parameters.AddWithValue("@clave", p.Clave);
+                    command.Parameters.AddWithValue("@rol", p.Rol);
                     connection.Open();
                     res = Convert.ToInt32(command.ExecuteScalar());
                     p.PropietarioId = res;
@@ -65,7 +66,7 @@ namespace AAF_Inmobiliaria.Models
             int res = -1;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string sql = $"UPDATE Propietarios SET Nombre=@nombre, Apellido=@apellido, Dni=@dni, Telefono=@telefono, Email=@email, Clave=@clave " +
+                string sql = $"UPDATE Propietarios SET Nombre=@nombre, Apellido=@apellido, Dni=@dni, Telefono=@telefono, Email=@email, Clave=@clave, Rol=@rol " +
                     $"WHERE PropietarioId = @id";
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
@@ -76,6 +77,7 @@ namespace AAF_Inmobiliaria.Models
                     command.Parameters.AddWithValue("@telefono", p.Telefono);
                     command.Parameters.AddWithValue("@email", p.Email);
                     command.Parameters.AddWithValue("@clave", p.Clave);
+                    command.Parameters.AddWithValue("@rol", p.Rol);
                     command.Parameters.AddWithValue("@id", p.PropietarioId);
                     connection.Open();
                     res = command.ExecuteNonQuery();
@@ -90,7 +92,7 @@ namespace AAF_Inmobiliaria.Models
             IList<Propietario> res = new List<Propietario>();
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string sql = $"SELECT PropietarioId, Nombre, Apellido, Dni, Telefono, Email, Clave" +
+                string sql = $"SELECT PropietarioId, Nombre, Apellido, Dni, Telefono, Email, Clave, Rol" +
                     $" FROM Propietarios";
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
@@ -108,6 +110,7 @@ namespace AAF_Inmobiliaria.Models
                             Telefono = reader.GetString(4),
                             Email = reader.GetString(5),
                             Clave = reader.GetString(6),
+                            Rol = reader.GetString(7),
                         };
                         res.Add(p);
                     }
@@ -122,7 +125,7 @@ namespace AAF_Inmobiliaria.Models
             Propietario p = null;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string sql = $"SELECT PropietarioId, Nombre, Apellido, Dni, Telefono, Email, Clave FROM Propietarios" +
+                string sql = $"SELECT PropietarioId, Nombre, Apellido, Dni, Telefono, Email, Clave, Rol FROM Propietarios" +
                     $" WHERE PropietarioId=@id";
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
@@ -141,6 +144,7 @@ namespace AAF_Inmobiliaria.Models
                             Telefono = reader.GetString(4),
                             Email = reader.GetString(5),
                             Clave = reader.GetString(6),
+                            Rol = reader.GetString(7),
                         };
                     }
                     connection.Close();
@@ -154,7 +158,7 @@ namespace AAF_Inmobiliaria.Models
             Propietario p = null;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string sql = $"SELECT PropietarioId, Nombre, Apellido, Dni, Telefono, Email, Clave FROM Propietarios" +
+                string sql = $"SELECT PropietarioId, Nombre, Apellido, Dni, Telefono, Email, Clave, Rol FROM Propietarios" +
                     $" WHERE Email=@email";
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
@@ -173,6 +177,7 @@ namespace AAF_Inmobiliaria.Models
                             Telefono = reader.GetString(4),
                             Email = reader.GetString(5),
                             Clave = reader.GetString(6),
+                            Rol = reader.GetString(7),
                         };
                     }
                     connection.Close();
@@ -187,7 +192,7 @@ namespace AAF_Inmobiliaria.Models
             Propietario p = null;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string sql = $"SELECT PropietarioId, Nombre, Apellido, Dni, Telefono, Email, Clave FROM Propietarios" +
+                string sql = $"SELECT PropietarioId, Nombre, Apellido, Dni, Telefono, Email, Clave, Rol FROM Propietarios" +
                     $" WHERE Nombre LIKE %@nombre% OR Apellido LIKE %@nombre";
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
@@ -206,6 +211,7 @@ namespace AAF_Inmobiliaria.Models
                             Telefono = reader.GetString(4),
                             Email = reader.GetString(5),
                             Clave = reader.GetString(6),
+                            Rol = reader.GetString(7),
                         };
                         res.Add(p);
                     }

@@ -1,52 +1,51 @@
 ﻿@model IEnumerable<AAF_Inmobiliaria.Models.Propietario>
 
 @{
-	ViewData["Title"] = "Propietarios";
+    ViewData["Title"] = "Inicio Propietarios";
 }
-<div class="form indexes container-fluid">
-	<nav class="indexes navbar navbar-light bg-light">
-		<a class="navbar-brand">Propietarios Actuales</a>
-		<form class="form-inline">
-			<span class="input-group-text, btn btn-outline-warning" data-toggle="tooltip" data-placement="bottom" title="Crear un propietario con sus atributos">Crear un nuevo propietario</span>
-			<div class="input-group-append" id="button-addon4">
-				<a class="btn btn-outline-success" asp-action="Create"> <i class="fas fa-plus"></i> </a>
-			</div>
-		</form>
-	</nav>
-		<table class="tablasC indexes table table-hover table-dark">
-			<thead class="thead-dark">
-				<tr>
-					<th scope="col"> @Html.DisplayNameFor(model => model.PropietarioId) </th>
-					<th scope="col"> @Html.DisplayNameFor(model => model.Nombre)</th>
-					<th scope="col"> @Html.DisplayNameFor(model => model.Apellido)</th>
-					<th scope="col"> @Html.DisplayNameFor(model => model.Dni)</th>
-					<th scope="col"> @Html.DisplayNameFor(model => model.Telefono)</th>
-					<th scope="col"> @Html.DisplayNameFor(model => model.Email)</th>
-					<th scope="col"> @Html.DisplayNameFor(model => model.Clave)</th>
-					<th scope="col"></th>
-				</tr>
-			</thead>
+<div class="form mt-5 container-fluid">
+    <nav class="mt-4 navbar navbar-light bg-light">
+        <a class="navbar-brand text-info">Propietarios Actuales.</a>
+        <form class="form-inline">
+            <span class="btn btn-outline-warning">Crear un nuevo propietario <i class="far fa-hand-point-right"> </i></span>
+            <div class="input-group-append ml-1">
+                <a class="btn btn-outline-success ml-1" asp-action="Create" data-toggle="tooltip" data-placement="top" title="Crear un propietario con sus atributos"> <i class="fas fa-plus"></i> </a>
+            </div>
+        </form>
+    </nav>
+    <table class="tablasC indexes table table-hover table-dark table-sm">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">@Html.DisplayNameFor(model => model.PropietarioId) </th>
+                <th scope="col">@Html.DisplayNameFor(model => model.Nombre)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.Apellido)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.Dni)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.Telefono)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.Email)</th>
+                <th scope="col">Opciones</th>
+            </tr>
+        </thead>
 
-			<tbody>
-				@foreach (var item in Model)
-				{
-					<tr>
-						<th scope="row">@Html.DisplayFor(modelItem => item.PropietarioId)</th>
-						<td>@Html.DisplayFor(modelItem => item.Nombre)</td>
-						<td>@Html.DisplayFor(modelItem => item.Apellido)</td>
-						<td>@Html.DisplayFor(modelItem => item.Dni)</td>
-						<td>@Html.DisplayFor(modelItem => item.Telefono)</td>
-						<td>@Html.DisplayFor(modelItem => item.Email)</td>
-						<td>@Html.DisplayFor(modelItem => item.Clave)</td>
-						<td>
-							<div class="btn-group mr-2 btn-group-sm" role="group" aria-label="Primer Grupo">
-								<button type="button" class="btn btn-outline-primary">@Html.ActionLink("Editar", "Edit", new { id = item.PropietarioId })</button>
-								<button type="button" class="btn btn-outline-success">@Html.ActionLink("Detalles", "Details", new { id = item.PropietarioId })</button>
-								<button type="button" class="btn btn-outline-danger">@Html.ActionLink("Eliminar", "Delete", new { id = item.PropietarioId })</button>
-							</div>
-						</td>
-					</tr>
-				}
-			</tbody>
-		</table>
-	</div>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th>@Html.DisplayFor(modelItem => item.PropietarioId)</th>
+                    <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Apellido)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Dni)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Telefono)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Email)</td>
+
+                    <td>
+                        <div class="btn-group mr-2 btn-group-sm" role="group" aria-label="Primer Grupo">
+                            <a asp-action="Edit" asp-route-id="@item.PropietarioId" class="btn btn-primary btn-sm">Editar</a>
+                            <a asp-action="Details" asp-route-id="@item.PropietarioId" class="btn btn-success btn-sm">Detalles</a>
+                            <a asp-action="Delete" asp-route-id="@item.PropietarioId" class="btn btn-danger btn-sm">Eliminar</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -2,12 +2,112 @@
 /* CSS Document */
 *{
 	font-size:13px;
-	font-family:roboto;
+	font-family:Roboto,sans-serif;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
      user-select: none;   
 }
+
+.scrollspy-example {
+    position: relative;
+    padding: 1rem;
+    overflow-y: scroll;
+    height: 35.5rem;
+}
+.view {
+  position: relative;
+  overflow: hidden;
+  cursor: default; }
+.btn-rounded, .counter {
+    border-radius: 10em;
+}
+
+
+.waves-effect.waves-light .waves-ripple {
+    background: rgba(255, 255, 255, 0.4);
+    background: radial-gradient(rgba(255, 255, 255, 0.2) 0, rgba(255, 255, 255, 0.3) 40%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0.5) 60%, rgba(255, 255, 255, 0) 70%); }
+
+
+
+
+.btn-blue {
+  color: #fff;
+  background-color: #1976d2 !important; }
+  .btn-blue:hover {
+    color: #fff;
+    background-color: #2083e4; }
+  .btn-blue:focus, .btn-blue.focus {
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15); }
+  .btn-blue:focus, .btn-blue:active, .btn-blue.active {
+    background-color: #0e4377; }
+  .btn-blue.dropdown-toggle {
+    background-color: #1976d2 !important; }
+    .btn-blue.dropdown-toggle:hover, .btn-blue.dropdown-toggle:focus {
+      background-color: #2083e4 !important; }
+  .btn-blue:not([disabled]):not(.disabled):active, .btn-blue:not([disabled]):not(.disabled).active,
+  .show > .btn-blue.dropdown-toggle {
+    background-color: #0e4377 !important;
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15); }
+  .btn-blue:not([disabled]):not(.disabled):active:focus, .btn-blue:not([disabled]):not(.disabled).active:focus,
+  .show > .btn-blue.dropdown-toggle:focus {
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15); }
+
+
+/*.btn.btn-sm {
+    padding: 0.5rem 1.6rem;
+    font-size: 0.64rem; }*/
+
+
+.view .mask {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-attachment: fixed; }
+
+.overlay .mask {
+  opacity: 0;
+  transition: all 0.4s ease-in-out; }
+  .overlay .mask:hover {
+    opacity: 1; }
+
+.md-v-line {
+    position: absolute;
+    border-left: 1px solid rgba(0,0,0,.125);
+    height: 50px;
+    top:0px;
+    left:54px;
+}
+
+.waves-effect {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent; }
+  .waves-effect .waves-ripple {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    margin-top: -50px;
+    margin-left: -50px;
+    pointer-events: none;
+    background: rgba(0, 0, 0, 0.2);
+    background: radial-gradient(rgba(0, 0, 0, 0.2) 0, rgba(0, 0, 0, 0.3) 40%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.5) 60%, rgba(255, 255, 255, 0) 70%);
+    border-radius: 50%;
+    opacity: 0;
+    transition-property: transform, opacity;
+    transition: all 0.5s ease-out;
+    transform: scale(0) translate(0, 0); }
+
 footer {
   position: absolute;
   bottom: 0;
@@ -27,4 +127,36 @@ footer {
 }
 .tablasC{
     border-radius: 5px;
+}
+.formSesion{
+    margin-top:10px;  
+    background-color: #fff;
+    padding: 1rem 1rem 1rem;
+    box-shadow: 2px 2px 16px 3px rgba(0, 0, 0, 0.4);
+}
+.iniSesion{
+    background-image:url("../img/botonSesion.png");  
+    border: outset #B4B3B3;    
+    border-width: 1px 1px 1px 3px; 
+}
+.iniSesion i{
+    margin-right: 4px;
+}
+.sesionEmail{
+    background-image:url("../img/botonSesionIniciada.png");  
+    border: outset #B4B3B3;    
+    border-width: 1px 1px 1px 3px; 
+}
+.sesionEmail i{
+    margin-right: 4px;
+}
+.dropdown-menu > li > a {
+    font-weight: 700;
+    padding: 10px 20px;
+}
+
+.bootstrap-select.btn-group .dropdown-menu li small {
+    display: block;
+    padding: 6px 0 0 0;
+    font-weight: 100;
 }

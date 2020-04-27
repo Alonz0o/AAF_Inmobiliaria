@@ -1,8 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AAF_Inmobiliaria.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -23,7 +28,8 @@ namespace AAF_Inmobiliaria.Controllers
         // GET: Propietarios/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var i = repositorioPropietario.ObtenerPorId(id);
+            return View(i);
         }
 
         // GET: Propietarios/Create
@@ -39,13 +45,19 @@ namespace AAF_Inmobiliaria.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
-                repositorioPropietario.Alta(p);
+                string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+                        password: p.Clave,
+                        salt: System.Text.Encoding.ASCII.GetBytes(configuracion["Salt"]),
+                        prf: KeyDerivationPrf.HMACSHA1,
+                        iterationCount: 1000,
+                        numBytesRequested: 256 / 8));
+                p.Clave = hashed;
+                int res = repositorioPropietario.Alta(p);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                return View(ex);
             }
         }
 
@@ -59,16 +71,25 @@ namespace AAF_Inmobiliaria.Controllers
         // POST: Propietarios/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, Propietario p)
         {
-            Propietario p = null;
-
             try
             {
-                // TODO: Add update logic here
-                p = repositorioPropietario.ObtenerPorId(id);                p.Nombre = collection["Nombre"];                p.Apellido = collection["Apellido"];                p.Dni = collection["Dni"];                p.Email = collection["Email"];                p.Telefono = collection["Telefono"];                repositorioPropietario.Modificacion(p);                TempData["Mensaje"] = "Datos guardados correctamente";                return RedirectToAction(nameof(Index));
+                string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+                        password: p.Clave,
+                        salt: System.Text.Encoding.ASCII.GetBytes(configuracion["Salt"]),
+                        prf: KeyDerivationPrf.HMACSHA1,
+                        iterationCount: 1000,
+                        numBytesRequested: 256 / 8));
+                p.Clave = hashed;
+                int res = repositorioPropietario.Modificacion(p);
+                TempData["Mensaje"] = "Datos guardados correctamente";
+                return RedirectToAction(nameof(Index));
             }
-            catch (Exception ex)            {                ViewBag.Error = ex.Message;                ViewBag.StackTrate = ex.StackTrace;                return View(p);            }
+            catch (Exception ex)
+            {
+                return View(ex);
+            }
 
         } 
 
@@ -96,6 +117,64 @@ namespace AAF_Inmobiliaria.Controllers
                 ViewBag.StackTrace = ex.StackTrace;
                 return View(p);
             }
+        }
+
+        [AllowAnonymous]
+        // GET: Usuarios/Login/
+        public ActionResult Login()
+        {
+            return View();
+        }
+        // POST: Usuarios/Login
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Login (LoginView login)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+                        password: login.Clave,
+                        salt: System.Text.Encoding.ASCII.GetBytes(configuracion["Salt"]),
+                        prf: KeyDerivationPrf.HMACSHA1,
+                        iterationCount: 1000,
+                        numBytesRequested: 256 / 8));
+                    var e = repositorioPropietario.ObtenerPorEmail(login.Email);
+                    if (e == null || e.Clave != hashed)
+                    {
+                        ModelState.AddModelError("", "El E-mail o la Constraseña no son correctos.");
+                        return View();
+                    }
+                    var claims = new List<Claim>
+                    {
+                        new Claim(ClaimTypes.Name, e.Email),       
+                        new Claim("TipoDeUsuario", e.Rol),
+                        new Claim("ApiyNom", e.Nombre + " " + e.Apellido),
+                        new Claim("Telefono", e.Telefono),
+                        new Claim("Dni", e.Dni),
+                        new Claim("PropietarioId", e.PropietarioId+""),
+                        new Claim(ClaimTypes.Role, e.Rol),
+                    };
+                    var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
+                    return RedirectToAction(nameof(Index), "Home");
+                }
+                return View();
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return View();
+            }
+        }
+        // GET: Usuarios/Logout
+        public async Task<ActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Index", "Home");
         }
     }
 }

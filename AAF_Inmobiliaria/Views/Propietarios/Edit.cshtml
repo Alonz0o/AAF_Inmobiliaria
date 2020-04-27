@@ -1,62 +1,45 @@
 ﻿@model AAF_Inmobiliaria.Models.Propietario
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar Propietario";
 }
-
-<h1>Edit</h1>
-
-<h4>Propietario</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
+@*-------------------------------------------*@
+    <div class="form indexes container-fluid">
+        <nav class="indexes navbar navbar-light bg-light">
+            <a class="navbar-brand">Editar Propietario</a>
+            <form class="form-inline">
+                <span class="input-group-text, btn btn-outline-warning" data-toggle="tooltip" data-placement="bottom" title="Edita dicho un propietario">Estas editando un propietario</span>
+            </form>
+        </nav>
+        <form class="indexes" asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="PropietarioId" class="control-label"></label>
-                <input asp-for="PropietarioId" class="form-control" />
-                <span asp-validation-for="PropietarioId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Nombre" class="control-label"></label>
-                <input asp-for="Nombre" class="form-control" />
-                <span asp-validation-for="Nombre" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Apellido" class="control-label"></label>
-                <input asp-for="Apellido" class="form-control" />
-                <span asp-validation-for="Apellido" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Dni" class="control-label"></label>
-                <input asp-for="Dni" class="form-control" />
-                <span asp-validation-for="Dni" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Telefono" class="control-label"></label>
-                <input asp-for="Telefono" class="form-control" />
-                <span asp-validation-for="Telefono" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Clave" class="control-label"></label>
-                <input asp-for="Clave" class="form-control" />
-                <span asp-validation-for="Clave" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+            <div class="crearUsuario">
+                <div class="form-group">
+                    <input asp-for="PropietarioId" class="form-control tbFlotante" type="hidden"> @*OCULTO*@
+
+                    <input asp-for="Nombre" class="form-control tbFlotante" type="text" placeholder="" minlength="3" maxlength="20" required pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ]{2,48}" title="Ingrese un Nombre valido">
+                    <label class="lblFlotante" data-content="Nombre"></label>
+                    <input asp-for="Apellido" class="form-control tbFlotante" type="text" placeholder="" minlength="3" maxlength="20" required pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ]{2,48}" title="Ingrese un Apellido valido">
+                    <label class="lblFlotante" data-content="Apellido"></label>
+                    <input asp-for="Dni" class="form-control tbFlotante" type="text" placeholder="" minlength="3" maxlength="8" required pattern="[-+]?[0-9]*[.,]?[0-9]+" title="Ingrese un DNI valido">
+                    <label class="lblFlotante" data-content="Dni"></label>
+                    <input asp-for="Telefono" class="form-control tbFlotante" type="text" placeholder="" minlength="3" maxlength="11" required pattern="[-+]?[0-9]*[.,]?[0-9]+" title="Ingrese Telefono valido">
+                    <label class="lblFlotante" data-content="Telefono"></label>
+                    <input asp-for="Email" class="form-control tbFlotante" type="email" placeholder="" minlength="5" maxlength="30" required>
+                    <label class="lblFlotante" data-content="E-Mail"></label>
+                    <input asp-for="Clave" class="form-control tbFlotante" type="text" placeholder="" minlength="5" maxlength="20" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" title="La Contraseña debe contener al menos una letra en MAYÚSCULA y un NUMERO">
+                    <label class="lblFlotante" data-content="Contraseña"></label>
+
+                    <input asp-for="Rol" class="form-control" type="hidden">@*OCULTO*@
+
+                </div>
+                <button type="submit" value="Save" name="registro" class="button  btn-lg">Editar</button>
+                <hr>
+                <a class="button btn btn-success btn-sm" asp-action="Index">Volver a la lista</a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+@*-------------------------------------------*@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

@@ -2,7 +2,122 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="jumbotron text-center mt-5">
+
+        <!-- Titulo -->
+        <h2 class="card-title h2">Bienvenido @(User.FindFirst("ApiyNom").Value)</h2>
+        <!-- Subtitulo -->
+        <p class="blue-text my-4 font-weight-bold"> Hola amigazo, que tal tu dia. </p>
+        <!-- Grid row -->
+        <div class="row d-flex justify-content-center">
+
+            <!-- Grid column -->
+            <div class="col-xl-7 pb-2">
+
+                <p class="card-text">Hola.</p>
+
+            </div>
+            <!-- Grid column -->
+
+        </div>
+        <!-- Grid row -->
+
+        <hr class="my-4">
+
+        <div class="mt-2">
+            <!-- Linkedin -->
+            <a class="btn"><i class="fab fa-linkedin-in grey-text"></i></a>
+            <!-- Twitter -->
+            <a class="btn"><i class="fab fa-twitter grey-text"></i></a>
+            <!-- Dribbble -->
+            <a class="btn"><i class="fab fa-facebook-f grey-text"></i></a>
+        </div>
+        <div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class=" modal-dialog cascading-modal" role="document">
+                <!--Content-->
+                <div class="form modal-content">
+
+                    <p class="h4 mb-4">Contactanos</p>
+
+                    <!-- Name -->
+                    <input type="text" id="defaultContactFormName" class="form-control mb-4" placeholder="Nombre y Apellido">
+
+                    <!-- Email -->
+                    <input type="email" id="defaultContactFormEmail" class="form-control mb-4" placeholder="E-mail">
+
+                    <!-- Subject -->
+                    <label>Asunto</label>
+                    <select class="browser-default custom-select mb-4">
+                        <option value="" disabled>Elije la opcion</option>
+                        <option value="1" selected>Feedback</option>
+                        <option value="2">Reportar un bug</option>
+                        <option value="3">Reportar un problema</option>
+                        <option value="4">Insultar al creador de Inmibiliario Canito</option>
+                    </select>
+
+                    <!-- Message -->
+                    <div class="form-group">
+                        <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3" placeholder="Mensaje"></textarea>
+                    </div>
+
+                    <!-- Copy -->
+                    <div class="custom-control custom-checkbox mb-4">
+                        <input type="checkbox" class="custom-control-input" id="defaultContactFormCopy">
+                        <label class="custom-control-label" for="defaultContactFormCopy">Envíarme una copia de este mensaje</label>
+                    </div>
+
+                    <!-- Send button -->
+                    <button class="btn btn-info btn-block" type="submit">Enviar</button>
+                </div>
+                <!--/.Content-->
+            </div>
+        </div>
+
+        <div class="text-center">
+            <a href="" class="btn btn-info btn-rounded my-3" data-toggle="modal" data-target="#modalContactForm">Enviar un mensaje</a>
+        </div>
+    </div>
+    <!-- Default form contact -->
+}
+else
+{
+    <div class="jumbotron text-center mt-5">
+
+        <!-- Titulo -->
+        <h2 class="card-title h2">Bienvenidos a mi pagina web diseñada con .NET Flanders</h2>
+        <!-- Subtitulo -->
+        <p class="blue-text my-4 font-weight-bold">Aprende sobre <a href="https://docs.microsoft.com/aspnet/core">crear aplicaciones web con ASP.NET Core</a>.</p>
+        <!-- Grid row -->
+        <div class="row d-flex justify-content-center">
+
+            <!-- Grid column -->
+            <div class="col-xl-7 pb-2">
+
+                <p class="card-text">Bienvenidos a la inmobiliaria canito, le ofrecemos los mejores inmuebles de la Argentina con materiales extranjeros de buena calidad para brindarle un hogar confortable.</p>
+
+            </div>
+            <!-- Grid column -->
+
+        </div>
+        <!-- Grid row -->
+
+        <hr class="my-4">
+
+        <div class="pt-2">
+            <a class="btn btn-blue" asp-controller="Propietarios" asp-action="Login"> Iniciar Sesion <i class="fas fa-key"> </i> </a>
+        </div>
+        <div class="mt-2">
+            <!-- Linkedin -->
+            <a class="btn"><i class="fab fa-linkedin-in grey-text"></i></a>
+            <!-- Twitter -->
+            <a class="btn"><i class="fab fa-twitter grey-text"></i></a>
+            <!-- Dribbble -->
+            <a class="btn"><i class="fab fa-facebook-f grey-text"></i></a>
+        </div>
+
+    </div>
+}

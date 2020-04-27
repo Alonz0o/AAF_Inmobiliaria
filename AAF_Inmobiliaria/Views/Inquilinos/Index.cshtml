@@ -1,77 +1,55 @@
 ﻿@model IEnumerable<AAF_Inmobiliaria.Models.Inquilino>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Inicio Inquilinos";
 }
+<div class="form mt-5 container-fluid">
+    <nav class="mt-4 navbar navbar-light bg-light">
+        <a class="navbar-brand text-info">Inquilinos Actuales.</a>
+        <form class="form-inline">
+            <span class="btn btn-outline-warning">Crear un nuevo inquilino <i class="far fa-hand-point-right"> </i></span>
+            <div class="input-group-append ml-1">
+                <a class="btn btn-outline-success ml-1" asp-action="Create" data-toggle="tooltip" data-placement="top" title="Crear un inquilino con sus atributos"> <i class="fas fa-plus"></i> </a>
+            </div>
+        </form>
+    </nav>
+    <table class="tablasC indexes table table-hover table-dark table-sm">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">@Html.DisplayNameFor(model => model.InquilinoId) </th>
+                <th scope="col">@Html.DisplayNameFor(model => model.Nombre)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.Apellido)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.Dni)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.Telefono)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.Email)</th>
+                <th scope="col">Publicado</th>
+                <th scope="col">Habilitado</th>
+                <th scope="col">Opciones</th>
+            </tr>
+        </thead>
 
-<h1>Index</h1>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th>@Html.DisplayFor(modelItem => item.InquilinoId)</th>
+                    <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Apellido)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Dni)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Telefono)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                    <td>@Html.DisplayFor(modelItem => item.EstaPublicado)</td>
+                    <td>@Html.DisplayFor(modelItem => item.EstaHabilitado)</td>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.InquilinoId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Apellido)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Dni)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Telefono)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EstaPublicado)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EstaHabilitado)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.InquilinoId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Apellido)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Dni)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Telefono)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EstaPublicado)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EstaHabilitado)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.InquilinoId }) |
-                @Html.ActionLink("Details", "Details", new { id=item.InquilinoId }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.InquilinoId })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+                    <td>
+                        <div class="btn-group mr-2 btn-group-sm" role="group" aria-label="Primer Grupo">
+                            <a asp-action="Edit" asp-route-id="@item.InquilinoId" class=" btn btn-primary">Editar</a>
+                            <a asp-action="Details" asp-route-id="@item.InquilinoId" class=" btn btn-success">Detalles</a>
+                            <a asp-action="Delete" asp-route-id="@item.InquilinoId" class=" btn btn-danger">Eliminar</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
