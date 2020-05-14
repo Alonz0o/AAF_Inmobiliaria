@@ -1,0 +1,51 @@
+﻿@model AAF_Inmobiliaria.Models.Alquiler
+
+@{
+    ViewData["Title"] = "Crear Alquiler";
+}
+@*-------------------------------------------*@
+<div class="form mt-5 container-fluid">
+    <nav class="mt-4 navbar navbar-light bg-light">
+        <a class="navbar-brand">Creando Alquiler</a>
+        <form class="form-inline">
+            <span class="input-group-text, btn btn-outline-warning" data-toggle="tooltip" data-placement="bottom" title="Estas Creando un alquiler con sus atributos">Estas creando un alquiler</span>
+        </form>
+    </nav>
+    <form class="mt-4" asp-action="Create">
+        <div class="crearUsuario">
+            <div class="form-group">
+                <input asp-for="AlquilerId" class="form-control" type="hidden" />
+
+                <div class="form-group purple-border mb-5">
+                    <label for="exampleFormControlTextarea4">Descripcion:</label>
+                    <textarea asp-for="Descripcion" class="form-control" rows="2"></textarea>
+                </div>
+                <input asp-for="FechaAlta" class="form-control tbFlotante" type="date" placeholder="">
+                <label class="lblFlotante" data-content="Fecha Alta"></label>
+                <input asp-for="FechaBaja" class="form-control tbFlotante" type="date" placeholder="">
+                <label class="lblFlotante" data-content="Fecha Baja"></label>
+                <input asp-for="Monto" class="form-control tbFlotante" type="number" placeholder="" min="0" required pattern="[-+]?[0-9]*[.,]?[0-9]+">
+                <label class="lblFlotante" data-content="Monto"></label>
+                <select class="custom-select" name="InmuebleId">
+                    @foreach (var iteminm in (IList<Inmueble>)ViewBag.Inmuebless)
+                    {
+                        <option value="@iteminm.InmuebleId">Direccion: @(iteminm.Direccion), Costo: $@(iteminm.Precio)</option>
+                    }
+                </select>
+                <label class="lblFlotante" data-content="Inmueble"></label>
+                <select class="form-control" name="InquilinoId">
+                    @foreach (var iteminq in (IList<Inquilino>)ViewBag.Inquilinoss)
+                    {
+                        <option value="@iteminq.InquilinoId">@(iteminq.Nombre) @(iteminq.Apellido)</option>
+                    }
+                </select>
+                <label class="lblFlotante" data-content="Inquilino"></label>
+            </div>
+            <button type="submit" value="Create" class="button btn-lg">Crear</button>
+            <hr>
+            <a class="button btn btn-success btn-sm" asp-action="Index">Volver a la lista</a>
+        </div>
+    </form>
+</div>
+@*-------------------------------------------*@
+

@@ -9,75 +9,45 @@ using Microsoft.Extensions.Configuration;
 
 namespace AAF_Inmobiliaria.Controllers
 {
-    public class InmueblesController : Controller
+    public class AlquileresController : Controller
     {
-
-        private readonly IConfiguration configuracion;
+        private readonly IConfiguration configuration;
+        private readonly RepositorioAlquiler repositorioAlquiler;
+        private readonly RepositorioInquilino repositorioInquilino;
         private readonly RepositorioInmueble repositorioInmueble;
-        public InmueblesController(IConfiguration configuration)
+        public AlquileresController(IConfiguration configuration)
         {
-            this.configuracion = configuration;
+            this.configuration = configuration;
+            repositorioAlquiler = new RepositorioAlquiler(configuration);
+            repositorioInquilino = new RepositorioInquilino(configuration);
             repositorioInmueble = new RepositorioInmueble(configuration);
         }
-
-        // GET: Inmuebles
-        public ActionResult Index(string dni)
+        // GET: Alquileres
+        public ActionResult Index()
         {
-            try
-            {
-                var lista = repositorioInmueble.ObtenerInmueblePorDni(dni);
-                return View(lista);
-            }
-            catch
-            {
-                return View();
-            }
+            var lista = repositorioAlquiler.ObtenerTodos();
+            return View(lista);
         }
-
-        // GET: Inmuebles/Details/5
+        // GET: Alquileres/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
-
-        // GET: Inmuebles/Create
+        // GET: Alquileres/Create
         public ActionResult Create()
         {
+            ViewBag.Inmuebless = repositorioInmueble.ObtenerTodos();
+            ViewBag.Inquilinoss = repositorioInquilino.ObtenerTodos();
             return View();
         }
-
-        // POST: Inmuebles/Create
+        // POST: Alquileres/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Inmueble inmueble)
+        public ActionResult Create(Alquiler alquiler)
         {
             try
             {
-                int id = int.Parse(@User.FindFirst("PropietarioId").Value);
-                inmueble.PropietarioId = id;
-                int res = repositorioInmueble.Alta(inmueble);
-                return RedirectToAction(nameof(Index));
-            }
-            catch (Exception ex)
-            {
-                return View(ex);
-            }
-        }
-        // GET: Inmuebles/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Inmuebles/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
+                repositorioAlquiler.Alta(alquiler);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -85,14 +55,35 @@ namespace AAF_Inmobiliaria.Controllers
                 return View();
             }
         }
-
-        // GET: Inmuebles/Delete/5
+        // GET: Alquileres/Edit/5
+        public ActionResult Edit(int id)
+        {
+            var al = repositorioAlquiler.ObtenerPorId(id);
+            ViewBag.Inmuebless = repositorioInmueble.ObtenerTodos();
+            ViewBag.Inquilinoss = repositorioInquilino.ObtenerTodos();
+            return View(al);
+        }
+        // POST: Alquileres/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, Alquiler alquiler)
+        {
+            try
+            {
+                repositorioAlquiler.Modificacion(alquiler);
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+        // GET: Alquileres/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
-
-        // POST: Inmuebles/Delete/5
+        // POST: Alquileres/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
@@ -100,7 +91,6 @@ namespace AAF_Inmobiliaria.Controllers
             try
             {
                 // TODO: Add delete logic here
-
                 return RedirectToAction(nameof(Index));
             }
             catch

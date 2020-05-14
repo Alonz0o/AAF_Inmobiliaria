@@ -27,26 +27,32 @@
             <ul class="nav nav-tabs menu">
                 @if (User.IsInRole("Administrador"))
                 {
-                    <li class="nav-item itemMenu">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index"> <i class="fas fa-home"> </i> Inicio </a>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index"><i class="fas fa-home"></i> Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Propietarios" asp-action="Index"> <i class="fas fa-house-user"> </i> Propietarios </a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Propietarios" asp-action="Index"><i class="fas fa-house-user"></i> Propietarios</a>
                     </li>
                 }
-                @if (User.IsInRole("Propietario"))
+                @if (User.IsInRole("SuperAdministrador"))
                 {
-                    <li class="nav-item itemMenu">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index"> <i class="fas fa-home"> </i> Inicio </a>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index"><i class="fas fa-home"></i> Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Inmuebles" asp-action="Index"> <i class="fas fa-building"> </i> Inmuebles</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Propietarios" asp-action="Index"><i class="fas fa-key"></i> Propietarios</a>
                     </li>
-                    <li class="nav-item disabled">
-                        <a class="nav-link disabled" asp-area="" asp-controller="Pagos" asp-action="Index"> <i class="fas fa-money-bill-alt"> </i> Pagos</a>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Inquilinos" asp-action="Index"><i class="fas fa-users"></i> Inquilinos</a>
                     </li>
-                    <li class="nav-item disabled">
-                        <a class="nav-link disabled" asp-area="" asp-controller="Alquileres" asp-action="Index"> <i class="fas fa-house-user"> </i> Alquileres</a>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Inmuebles" asp-action="Index"><i class="fas fa-city"></i> Inmuebles</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Pagos" asp-action="Index"><i class="fas fa-money-bill-alt"></i> Pagos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Alquileres" asp-action="Index"><i class="fas fa-house-user"></i> Alquileres</a>
                     </li>
                 }
                 @if (User.Identity.IsAuthenticated)
@@ -57,10 +63,10 @@
                             @User.Identity.Name
                         </a>
                         <div class="dropdown-menu w-100">
-                            <form class="px-3">                            
+                            <form class="px-3">
                                 <ul class="list-group">
                                     <li class="list-group-item active"> <img src="~/img/usuarioCualquiera.png" alt="" title="" width="30" height="30" class="d-inline-block"> @(User.FindFirst("ApiyNom").Value) </li>
-                                    <li class="list-group-item text-center"> <i class="fas fa-tags"></i> @(User.FindFirst("TipoDeUsuario").Value) </li>                                
+                                    <li class="list-group-item text-center text-primary"> @(User.FindFirst("TipoDeUsuario").Value) </li>
                                 </ul>
                                 <hr />
                                 <div class="form-group">
@@ -69,13 +75,13 @@
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text"><i class="fas fa-dna"></i></div>
                                             </div>
-                                            <input type="text" class="form-control" id="inputDni" placeholder="@(User.FindFirst("Dni").Value)">
+                                            <input type="text" class="form-control" id="inputDni" placeholder="375599310">
                                         </div>
                                         <div class="input-group mb-2">
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text"><i class="fas fa-phone"></i></div>
                                             </div>
-                                            <input type="text" class="form-control" id="inputTelefono" placeholder="@(User.FindFirst("Telefono").Value)">
+                                            <input type="text" class="form-control" id="inputTelefono" placeholder="58885155">
                                         </div>
                                     </fieldset>
                                 </div>
@@ -93,7 +99,7 @@
                         <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index"> <i class="fas fa-home"> </i> Inicio </a>
                     </li>
                     <li class="nav-item iniSesion">
-                        <a class="nav-link btn text-light" asp-area="" asp-controller="Propietarios" asp-action="Login"> <i class="fas fa-key"> </i> Iniciar Sesion </a>
+                        <a class="nav-link btn text-light" asp-area="" asp-controller="Usuarios" asp-action="Login"> <i class="fas fa-key"> </i> Iniciar Sesion </a>
                     </li>
                 }
             </ul>

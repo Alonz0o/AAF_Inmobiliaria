@@ -68,4 +68,7 @@ input[type=text],input[type=email] {
 input[type=text],input[type=number] {
     user-select:text; 
 }
+textarea {
+    user-select: text;
+}
 

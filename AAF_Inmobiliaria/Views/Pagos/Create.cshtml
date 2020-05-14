@@ -1,0 +1,33 @@
+﻿@model AAF_Inmobiliaria.Models.Pago
+
+@{
+    ViewData["Title"] = "Crear Pago";
+}
+@*-------------------------------------------*@
+<div class="form mt-5 container-fluid">
+    <nav class="mt-4 navbar navbar-light bg-light">
+        <a class="navbar-brand">Crear Pago</a>
+        <form class="form-inline">
+            <span class="input-group-text, btn btn-outline-warning" data-toggle="tooltip" data-placement="bottom" title="Crea un inmueble con sus atributos">Estas creando un Pago</span>
+        </form>
+    </nav>
+    <form class="mt-4" asp-action="Create">
+        <div class="crearUsuario">
+            <div class="form-group">
+                <input asp-for="Numero" class="form-control tbFlotante" type="number" placeholder="" min="0" required pattern="[-+]?[0-9]*[.,]?[0-9]+">
+                <label class="lblFlotante" data-content="Numero De Actividad Realizada"></label>
+                <input type="date" asp-for="Fecha" class="form-control tbFlotante" placeholder="">
+                <label class="lblFlotante" data-content="Fecha De Pago"></label>
+                <input asp-for="Importe" class="form-control tbFlotante" type="number" placeholder="" min="0" required pattern="[-+]?[0-9]*[.,]?[0-9]+">
+                <label class="lblFlotante" data-content="Importe Total"></label>
+            
+                <input class="form-control" value="@ViewBag.Alquiler.Inmueble.Direccion" readonly />
+                <input asp-for="AlquilerId" class="form-control" value="@ViewBag.Alquiler.AlquilerId" hidden />
+            </div>
+            <button type="submit" value="Create" name="registro" class="button  btn-lg">Realizar Pago</button>
+            <hr>
+            <a class="button btn btn-success btn-sm" asp-action="Index">Volver a la lista</a>
+        </div>
+    </form>
+</div>
+@*-------------------------------------------*@

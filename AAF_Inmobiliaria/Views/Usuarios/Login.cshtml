@@ -1,0 +1,48 @@
+﻿@model AAF_Inmobiliaria.Models.LoginView
+
+@{
+    ViewData["Title"] = "Usuario";
+}
+
+
+
+@* --------------------------------------ARIEL-------------------------------------- *@
+<div class="mt-5 formSesion container-fluid w-50">
+    <nav class="mt-4 navbar navbar-light bg-light">
+        <a class="navbar-brand">Iniciar Sesion</a>
+        <form class="form-inline">
+            <span class="input-group-text, btn btn-outline-warning">Estas iniciando sesion</span>
+            <div class="input-group-append ml-1">
+                <a class="btn btn-outline-success ml-1"> <i class="fas fa-user-check"></i> </a>
+            </div>
+        </form>
+    </nav>
+    <form class="indexes" asp-action="Login">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="crearUsuario">
+            <div class="form-group">
+                <input asp-for="Email" class="form-control tbFlotante" type="email" placeholder="" required>
+                <label class="lblFlotante" data-content="E-Mail"></label>
+                <input asp-for="Clave" class="form-control tbFlotante" type="password" placeholder="" required>
+                <label class="lblFlotante" data-content="Contraseña"></label>
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="Msesion" name="chMsesion">
+                    <label class="custom-control-label" for="Msesion">Manter sesion iniciada</label>
+                </div>
+            </div>
+            <button type="submit" value="Create" name="registro" class="button btn-info btn-lg">Iniciar Sesion</button>
+            <hr>
+            <a class="button btn btn-success btn-sm" asp-controller="Home" asp-action="Index">Salir</a>
+        </div>
+    </form>
+</div>
+
+
+@* --------------------------------------ARIEL-------------------------------------- *@
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+

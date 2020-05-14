@@ -1,0 +1,77 @@
+﻿@model IEnumerable<AAF_Inmobiliaria.Models.Alquiler>
+
+@{
+    ViewData["Title"] = "Inicio Alquileres";
+}
+
+@*-----------------------------------------------------*@
+<div class="form mt-5 container-fluid">
+    <nav class="mt-4 navbar navbar-light bg-light">
+        <a class="navbar-brand text-info">Alquileres Actuales</a>
+        <form class="form-inline" asp-controller="Pagos" asp-action="Index">
+            <a class="btn btn-outline-success ml-1" asp-action="Create" data-toggle="tooltip" data-placement="top" title="Crear un alquiler con sus atributos"> <i class="fas fa-plus"></i> </a> 
+        </form>
+    </nav>
+    @if (Model != null && Model.Count() != 0)
+    {
+        <section id="destinos">
+            <!-- Inmueble inicio fila(row) -->
+            <div class="row scrollspy-example">
+                <!-- Columna inicio inmueble -->
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-6 col-lg-3">
+                        <!--Insetar inmueble-->
+                        <div class="card card-personal mb-4">
+                            <!--Inmueble imagen-->
+                            <div class="view overlay">
+                                <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/49.jpg" alt="Card image cap">
+                                <a href="#!">
+                                    <div class="mask rgba-white-slight"></div>
+                                </a>
+                            </div>
+                            <!--Inmueble imagen-->
+                            <!--Inmueble contenido-->
+                            @*MODIFICADO*@
+                            <div class="dropdown">
+                                @*scrollspy-example | Por si se tienen mas datos*@
+                                <div class="form-group">
+                                    <p class="text-center mt-3">
+                                        <!--Clasifica-->
+                                        <i class="fas fa-star text-warning"> </i>
+                                        <i class="fas fa-star text-warning"> </i>
+                                        <i class="fas fa-star text-warning"> </i>
+                                        <i class="fas fa-star text-warning"> </i>
+                                        <i class="fas fa-star text-warning"> </i>
+                                    </p>
+                                </div>
+                                <div class="form-group">
+                                    <ul class="list-group">
+                                        <li class="list-group-item active"><i class="fas fa-city mr-3"></i>Inmueble</li>
+                                        <li class="list-group-item"><i class="fas fa-info-circle mr-3" data-toggle="tooltip" data-placement="top" title="Dirreccion del Inmueble"></i>@Html.DisplayFor(modelItem => item.Inmueble.Direccion)</li>
+                                        <li class="list-group-item"><i class="fas fa-info-circle mr-3" data-toggle="tooltip" data-placement="top" title="Precio del Inmueble"></i>@Html.DisplayFor(modelItem => item.Inmueble.Precio)</li>
+                                        <li class="list-group-item active"><i class="fas fa-user mr-3"></i>Inquilino</li>
+                                        <li class="list-group-item"><i class="fas fa-info-circle mr-3" data-toggle="tooltip" data-placement="top" title="Nombre Inquilino"></i>@Html.DisplayFor(modelItem => item.Inquilino.Nombre)</li>
+                                        <li class="list-group-item"><i class="fas fa-info-circle mr-3" data-toggle="tooltip" data-placement="top" title="Apellido Inquilino"></i>@Html.DisplayFor(modelItem => item.Inquilino.Apellido)</li>
+                                        <li class="list-group-item active"><i class="fas fa-house-user mr-3"></i>Alquiler</li>
+                                        <li class="list-group-item"><i class="fas fa-info-circle mr-3" data-toggle="tooltip" data-placement="top" title="Descripcion del Inmueble"></i>@Html.DisplayFor(modelItem => item.Descripcion)</li>
+                                        <li class="list-group-item"><i class="fas fa-info-circle mr-3" data-toggle="tooltip" data-placement="top" title="Fecha de entrega del Inmueble"></i>@Html.DisplayFor(modelItem => item.FechaAlta)</li>
+                                        <li class="list-group-item"><i class="fas fa-info-circle mr-3" data-toggle="tooltip" data-placement="top" title="Fecha de final del Inmueble"></i>@Html.DisplayFor(modelItem => item.FechaBaja)</li>
+                                        <li class="list-group-item"><i class="fas fa-info-circle mr-3" data-toggle="tooltip" data-placement="top" title="Monto total del Inmueble"></i>@Html.DisplayFor(modelItem => item.Monto)</li>
+                                    </ul>
+                                    <a asp-action="Edit" asp-route-id="@item.AlquilerId" class="btn btn-outline-info w-100">Editar</a>
+                                    <a asp-action="Delete" asp-route-id="@item.AlquilerId" class="btn btn-outline-danger w-100">Eliminar</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Inmueble contenido-->
+                    </div>
+                    <!--Insetar inmueble-->
+
+                } <!--Insetar inmueble-->
+            </div>
+            <!-- Inmueble cierre fila(row) -->
+        </section>
+    }
+</div>
+@*---------------------------------------------------*@

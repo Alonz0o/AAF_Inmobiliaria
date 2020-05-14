@@ -13,15 +13,14 @@ namespace AAF_Inmobiliaria.Models
         public int InmuebleId { get; set; }
         [Required]
         public string Direccion { get; set; }
-        [Required]
         public int Ambientes { get; set; }
-        [Required]
         public int Superficie { get; set; }
         public string Latitud { get; set; }
         public string Longitud { get; set; }
+        public decimal Precio { get; set; }
         public int PropietarioId { get; set; }
         [ForeignKey("PropietarioId")]
-        public Propietario propietario { get; set; }
+        public Propietario Propietario { get; set; }
         public Boolean EstaPublicado { get; set; }
         public Boolean EstaHabilitado { get; set; }
     }

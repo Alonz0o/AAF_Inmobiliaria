@@ -44,47 +44,6 @@ namespace AAF_Inmobiliaria.Models
             }
             return res;
         }
-        //public int Baja(int id)
-        //{
-        //    int res = -1;
-        //    using (SqlConnection connection = new SqlConnection(connectionString))
-        //    {
-        //        string sql = $"DELETE FROM Inmuebles WHERE InmuebleId = @id";
-        //        using (SqlCommand command = new SqlCommand(sql, connection))
-        //        {
-        //            command.CommandType = CommandType.Text;
-        //            command.Parameters.AddWithValue("@id", id);
-        //            connection.Open();
-        //            res = command.ExecuteNonQuery();
-        //            connection.Close();
-        //        }
-        //    }
-        //    return res;
-        //}
-        //public int Modificacion(Inmueble i)
-        //{
-        //    int res = -1;
-        //    using (SqlConnection connection = new SqlConnection(connectionString))
-        //    {
-        //        string sql = $"UPDATE Inmuebles SET Nombre=@nombre, Apellido=@apellido, Dni=@dni, Telefono=@telefono, Email=@email, Clave=@clave " +
-        //            $"WHERE InmuebleId = @id";
-        //        using (SqlCommand command = new SqlCommand(sql, connection))
-        //        {
-        //            command.CommandType = CommandType.Text;
-        //            command.Parameters.AddWithValue("@nombre", i.Nombre);
-        //            command.Parameters.AddWithValue("@apellido", i.Apellido);
-        //            command.Parameters.AddWithValue("@dni", i.Dni);
-        //            command.Parameters.AddWithValue("@telefono", i.Telefono);
-        //            command.Parameters.AddWithValue("@email", i.Email);
-        //            command.Parameters.AddWithValue("@clave", i.Clave);
-        //            command.Parameters.AddWithValue("@id", i.InmuebleId);
-        //            connection.Open();
-        //            res = command.ExecuteNonQuery();
-        //            connection.Close();
-        //        }
-        //    }
-        //    return res;
-        //}
         public IList<Inmueble> ObtenerTodosDelPropietario(int id)
         {
             IList<Inmueble> res = new List<Inmueble>();
@@ -112,6 +71,91 @@ namespace AAF_Inmobiliaria.Models
                             PropietarioId = reader.GetInt32(6),
                             EstaPublicado = reader.GetBoolean(7),
                             EstaHabilitado = reader.GetBoolean(8),
+                        };
+                        res.Add(i);
+                    }
+                    connection.Close();
+                }
+            }
+            return res;
+        }
+
+        public IList<Inmueble> ObtenerTodos()
+        {
+            IList<Inmueble> res = new List<Inmueble>();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string sql = $"SELECT i.InmuebleId, Direccion, Ambientes, Superficie, Latitud, Longitud, Precio, i.PropietarioId, " +
+                    "p.Nombre,p.Apellido " +
+                    " FROM Inmuebles i INNER JOIN Propietarios p ON i.PropietarioId = p.propietarioId " +
+                    "ORDER BY Direccion ";
+                using (var command = new SqlCommand(sql, connection))
+                {
+                    command.CommandType = CommandType.Text;
+                    connection.Open();
+                    var reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Inmueble i = new Inmueble
+                        {
+                            InmuebleId = reader.GetInt32(0),
+                            Direccion = reader.GetString(1),
+                            Ambientes = reader.GetInt32(2),
+                            Superficie = reader.GetInt32(3),
+                            Latitud = reader.GetString(4),
+                            Longitud = reader.GetString(5),
+                            Precio = reader.GetDecimal(6),
+                            PropietarioId = reader.GetInt32(7),
+                            Propietario = new Propietario
+                            {
+                                Nombre = reader.GetString(8),
+                                Apellido = reader.GetString(9),
+                            
+                            },
+                        };
+                        res.Add(i);
+                    }
+                    connection.Close();
+                }
+            }
+            return res;
+        }
+
+        public IList<Inmueble> ObtenerInmueblePorDni(string dni)
+        {
+            IList<Inmueble> res = new List<Inmueble>();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string sql = $"SELECT InmuebleId, Direccion, Ambientes, Superficie, Latitud, Longitud, Precio, i.PropietarioId, " +
+                    $" p.Nombre, p.Apellido, p.Dni, p.Telefono, p.Email" +
+                    $" FROM Inmuebles i INNER JOIN Propietarios p ON i.PropietarioId = p.propietarioId" +
+                    $" WHERE p.Dni = @dni";
+                using (var command = new SqlCommand(sql, connection))
+                {
+                    command.CommandType = CommandType.Text;
+                    command.Parameters.Add("@dni", SqlDbType.VarChar).Value = dni;
+                    connection.Open();
+                    var reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Inmueble i = new Inmueble
+                        {
+                            InmuebleId = reader.GetInt32(0),
+                            Direccion = reader.GetString(1),
+                            Ambientes = reader.GetInt32(2),
+                            Superficie = reader.GetInt32(3),
+                            Latitud = reader.GetString(4),
+                            Longitud = reader.GetString(5),
+                            Precio = reader.GetDecimal(6),
+                            PropietarioId = reader.GetInt32(7),
+                            Propietario = new Propietario
+                            {
+                                Nombre = reader.GetString(8),
+                                Apellido = reader.GetString(9),
+                                Dni = reader.GetString(10),
+                                Telefono = reader.GetString(11),
+                                Email = reader.GetString(12),
+                            },
                         };
                         res.Add(i);
                     }
