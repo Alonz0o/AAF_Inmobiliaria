@@ -23,8 +23,8 @@ namespace AAF_Inmobiliaria.Models
             int res = -1;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string sql = $"INSERT INTO Propietarios (Nombre, Apellido, Dni, Telefono, Email, Clave, Rol) " +
-                    $"VALUES (@nombre, @apellido, @dni, @telefono, @email, @clave, @rol);" +
+                string sql = $"INSERT INTO Propietarios (Nombre, Apellido, Dni, Telefono, Email) " +
+                    $"VALUES (@nombre, @apellido, @dni, @telefono, @email);" +
                     $"SELECT SCOPE_IDENTITY();";//devuelve el id insertado
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
@@ -34,8 +34,6 @@ namespace AAF_Inmobiliaria.Models
                     command.Parameters.AddWithValue("@dni", p.Dni);
                     command.Parameters.AddWithValue("@telefono", p.Telefono);
                     command.Parameters.AddWithValue("@email", p.Email);
-                    command.Parameters.AddWithValue("@clave", p.Clave);
-                    command.Parameters.AddWithValue("@rol", p.Rol);
                     connection.Open();
                     res = Convert.ToInt32(command.ExecuteScalar());
                     p.PropietarioId = res;
@@ -66,7 +64,7 @@ namespace AAF_Inmobiliaria.Models
             int res = -1;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string sql = $"UPDATE Propietarios SET Nombre=@nombre, Apellido=@apellido, Dni=@dni, Telefono=@telefono, Email=@email, Clave=@clave, Rol=@rol " +
+                string sql = $"UPDATE Propietarios SET Nombre=@nombre, Apellido=@apellido, Dni=@dni, Telefono=@telefono, Email=@email " +
                     $"WHERE PropietarioId = @id";
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
@@ -76,8 +74,6 @@ namespace AAF_Inmobiliaria.Models
                     command.Parameters.AddWithValue("@dni", p.Dni);
                     command.Parameters.AddWithValue("@telefono", p.Telefono);
                     command.Parameters.AddWithValue("@email", p.Email);
-                    command.Parameters.AddWithValue("@clave", p.Clave);
-                    command.Parameters.AddWithValue("@rol", p.Rol);
                     command.Parameters.AddWithValue("@id", p.PropietarioId);
                     connection.Open();
                     res = command.ExecuteNonQuery();
@@ -92,7 +88,7 @@ namespace AAF_Inmobiliaria.Models
             IList<Propietario> res = new List<Propietario>();
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string sql = $"SELECT PropietarioId, Nombre, Apellido, Dni, Telefono, Email, Clave, Rol" +
+                string sql = $"SELECT PropietarioId, Nombre, Apellido, Dni, Telefono, Email" +
                     $" FROM Propietarios";
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
@@ -109,8 +105,6 @@ namespace AAF_Inmobiliaria.Models
                             Dni = reader.GetString(3),
                             Telefono = reader.GetString(4),
                             Email = reader.GetString(5),
-                            Clave = reader.GetString(6),
-                            Rol = reader.GetString(7),
                         };
                         res.Add(p);
                     }
@@ -125,7 +119,7 @@ namespace AAF_Inmobiliaria.Models
             Propietario p = null;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string sql = $"SELECT PropietarioId, Nombre, Apellido, Dni, Telefono, Email, Clave, Rol FROM Propietarios" +
+                string sql = $"SELECT PropietarioId, Nombre, Apellido, Dni, Telefono, Email FROM Propietarios" +
                     $" WHERE PropietarioId=@id";
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
@@ -143,8 +137,6 @@ namespace AAF_Inmobiliaria.Models
                             Dni = reader.GetString(3),
                             Telefono = reader.GetString(4),
                             Email = reader.GetString(5),
-                            Clave = reader.GetString(6),
-                            Rol = reader.GetString(7),
                         };
                     }
                     connection.Close();
@@ -158,7 +150,7 @@ namespace AAF_Inmobiliaria.Models
             Propietario p = null;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string sql = $"SELECT PropietarioId, Nombre, Apellido, Dni, Telefono, Email, Clave, Rol FROM Propietarios" +
+                string sql = $"SELECT PropietarioId, Nombre, Apellido, Dni, Telefono, Email FROM Propietarios" +
                     $" WHERE Email=@email";
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
@@ -176,8 +168,6 @@ namespace AAF_Inmobiliaria.Models
                             Dni = reader.GetString(3),
                             Telefono = reader.GetString(4),
                             Email = reader.GetString(5),
-                            Clave = reader.GetString(6),
-                            Rol = reader.GetString(7),
                         };
                     }
                     connection.Close();
@@ -192,7 +182,7 @@ namespace AAF_Inmobiliaria.Models
             Propietario p = null;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string sql = $"SELECT PropietarioId, Nombre, Apellido, Dni, Telefono, Email, Clave, Rol FROM Propietarios" +
+                string sql = $"SELECT PropietarioId, Nombre, Apellido, Dni, Telefono, Email FROM Propietarios" +
                     $" WHERE Nombre LIKE %@nombre% OR Apellido LIKE %@nombre";
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
@@ -210,8 +200,38 @@ namespace AAF_Inmobiliaria.Models
                             Dni = reader.GetString(3),
                             Telefono = reader.GetString(4),
                             Email = reader.GetString(5),
-                            Clave = reader.GetString(6),
-                            Rol = reader.GetString(7),
+                        };
+                        res.Add(p);
+                    }
+                    connection.Close();
+                }
+            }
+            return res;
+        }
+
+        public IList<Propietario> ObtenerTodos1()
+        {
+            IList<Propietario> res = new List<Propietario>();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string sql = $"SELECT PropietarioId, Nombre, Apellido, Dni, Telefono, Email" +
+                    $" FROM Propietarios";
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.CommandType = CommandType.Text;
+                    connection.Open();
+                    var reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Propietario p = new Propietario
+                        {
+                            PropietarioId = reader.GetInt32(0),
+                            Nombre = reader.GetString(1),
+                            Apellido = reader.GetString(2),
+                            Dni = reader.GetString(3),
+                            Telefono = reader.GetString(4),
+                            Email = reader.GetString(5),
+                            
                         };
                         res.Add(p);
                     }

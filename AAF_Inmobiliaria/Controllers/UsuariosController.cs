@@ -15,6 +15,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace AAF_Inmobiliaria.Controllers
 {
+    [Authorize]
     public class UsuariosController : Controller
     {
         private readonly IConfiguration configuracion;

@@ -24,19 +24,17 @@
                 <label class="lblFlotante" data-content="Latitud"></label>
                 <input asp-for="Longitud" class="form-control tbFlotante" type="number" placeholder="" min="0" required pattern="[-+]?[0-9]*[.,]?[0-9]+">
                 <label class="lblFlotante" data-content="Longitud"></label>
-                <div class="row">
-                    <label class="col-form-label col-sm-2 pt-0">Disponibilidad:</label>
-                    <div>
-                        <div class="custom-control custom-checkbox">
-                            <input class="custom-control-input" id="chPublicado" asp-for="EstaPublicado">
-                            <label class="custom-control-label" for="chPublicado">Publicación</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                            <input class="custom-control-input" id="chHabilitado" asp-for="EstaHabilitado">
-                            <label class="custom-control-label" for="chHabilitado">Habilitación</label>
-                            <div class="invalid-feedback">Eres Hombre o Mujer?</div>
-                        </div>
-                    </div>
+                <input asp-for="Precio" class="form-control tbFlotante" type="number" placeholder="" min="0" required pattern="[-+]?[0-9]*[.,]?[0-9]+">
+                <label class="lblFlotante" data-content="Precio"></label>
+                <div class="form-group">
+                    <label class="control-label">Propietario</label>
+                    <select class="form-control" name="PropietarioId">
+                        @foreach (var item in (IList<Propietario>)ViewBag.Propietarios)
+                        {
+                            <option value="@item.PropietarioId">@(item.Nombre + " " + item.Apellido)</option>
+                        }
+                    </select>
+                    <span asp-validation-for="PropietarioId" class="text-danger"> </span>
                 </div>
             </div>
             <button type="submit" value="Create" name="registro" class="button  btn-lg">Registrarse</button>

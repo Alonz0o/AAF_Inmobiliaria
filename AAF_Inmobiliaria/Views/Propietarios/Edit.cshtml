@@ -27,11 +27,6 @@
                     <label class="lblFlotante" data-content="Telefono"></label>
                     <input asp-for="Email" class="form-control tbFlotante" type="email" placeholder="" minlength="5" maxlength="30" required>
                     <label class="lblFlotante" data-content="E-Mail"></label>
-                    <input asp-for="Clave" class="form-control tbFlotante" type="text" placeholder="" minlength="5" maxlength="20" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" title="La Contraseña debe contener al menos una letra en MAYÚSCULA y un NUMERO">
-                    <label class="lblFlotante" data-content="Contraseña"></label>
-
-                    <input asp-for="Rol" class="form-control" type="hidden">@*OCULTO*@
-
                 </div>
                 <button type="submit" value="Save" name="registro" class="button  btn-lg">Editar</button>
                 <hr>

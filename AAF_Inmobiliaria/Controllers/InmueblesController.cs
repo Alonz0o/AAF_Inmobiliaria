@@ -3,35 +3,34 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AAF_Inmobiliaria.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 
 namespace AAF_Inmobiliaria.Controllers
 {
+    [Authorize]
     public class InmueblesController : Controller
     {
 
         private readonly IConfiguration configuracion;
         private readonly RepositorioInmueble repositorioInmueble;
+        private readonly RepositorioPropietario repositorioPropietario;
         public InmueblesController(IConfiguration configuration)
         {
             this.configuracion = configuration;
             repositorioInmueble = new RepositorioInmueble(configuration);
+            repositorioPropietario = new RepositorioPropietario(configuration);
         }
 
         // GET: Inmuebles
-        public ActionResult Index(string dni)
+        public ActionResult Index(String dni)
         {
-            try
-            {
+            dni = dni ?? "";
                 var lista = repositorioInmueble.ObtenerInmueblePorDni(dni);
                 return View(lista);
-            }
-            catch
-            {
-                return View();
-            }
+           
         }
 
         // GET: Inmuebles/Details/5
@@ -43,6 +42,7 @@ namespace AAF_Inmobiliaria.Controllers
         // GET: Inmuebles/Create
         public ActionResult Create()
         {
+            ViewBag.Propietarios = repositorioPropietario.ObtenerTodos();
             return View();
         }
 
@@ -53,13 +53,13 @@ namespace AAF_Inmobiliaria.Controllers
         {
             try
             {
-                int id = int.Parse(@User.FindFirst("PropietarioId").Value);
-                inmueble.PropietarioId = id;
+                
                 int res = repositorioInmueble.Alta(inmueble);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
             {
+                ViewBag.Propietarios = repositorioPropietario.ObtenerTodos();
                 return View(ex);
             }
         }

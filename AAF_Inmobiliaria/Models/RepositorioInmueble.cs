@@ -22,8 +22,8 @@ namespace AAF_Inmobiliaria.Models
             int res = -1;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string sql = $"INSERT INTO Inmuebles (Direccion, Ambientes, Superficie, Latitud, Longitud, propietarioId, EstaPublicado, EstaHabilitado) " +
-                    $"VALUES (@direccion, @ambientes, @superficie, @latitud, @longitud, @propietarioId, 1, 1);" +
+                string sql = $"INSERT INTO Inmuebles (Direccion, Ambientes, Superficie, Latitud, Longitud, Precio, propietarioId, EstaPublicado, EstaHabilitado) " +
+                    $"VALUES (@direccion, @ambientes, @superficie, @latitud, @longitud, @precio, @propietarioId, 1, 1);" +
                     $"SELECT SCOPE_IDENTITY();";//devuelve el id insertado
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
@@ -33,6 +33,7 @@ namespace AAF_Inmobiliaria.Models
                     command.Parameters.AddWithValue("@superficie", i.Superficie);
                     command.Parameters.AddWithValue("@latitud", i.Latitud);
                     command.Parameters.AddWithValue("@longitud", i.Longitud);
+                    command.Parameters.AddWithValue("@precio", i.Precio);
                     command.Parameters.AddWithValue("@propietarioId", i.PropietarioId);
                     command.Parameters.AddWithValue("@estaPublicado", i.EstaPublicado);
                     command.Parameters.AddWithValue("@estaHabilitado", i.EstaHabilitado);
@@ -86,9 +87,9 @@ namespace AAF_Inmobiliaria.Models
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 string sql = $"SELECT i.InmuebleId, Direccion, Ambientes, Superficie, Latitud, Longitud, Precio, i.PropietarioId, " +
-                    "p.Nombre,p.Apellido " +
-                    " FROM Inmuebles i INNER JOIN Propietarios p ON i.PropietarioId = p.propietarioId " +
-                    "ORDER BY Direccion ";
+                    $" p.Nombre,p.Apellido " +
+                    $" FROM Inmuebles i INNER JOIN Propietarios p ON i.PropietarioId = p.propietarioId " +
+                    $" ORDER BY Direccion ";
                 using (var command = new SqlCommand(sql, connection))
                 {
                     command.CommandType = CommandType.Text;

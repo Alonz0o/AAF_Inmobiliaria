@@ -29,8 +29,8 @@ namespace AAF_Inmobiliaria
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                .AddCookie(options =>
                {
-                   options.LoginPath = "/Home/Login";
-                   options.LogoutPath = "/Home/Logout";
+                   options.LoginPath = "/Usuarios/Login";
+                   options.LogoutPath = "/Usuarios/Logout";
                    options.AccessDeniedPath = "/Home/Restringido";
                });
             services.Configure<CookiePolicyOptions>(options =>

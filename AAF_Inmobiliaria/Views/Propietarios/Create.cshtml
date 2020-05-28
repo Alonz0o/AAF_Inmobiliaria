@@ -23,24 +23,8 @@
                 <label class="lblFlotante" data-content="Dni"></label>
                 <input asp-for="Telefono" class="form-control tbFlotante" type="text" placeholder="" minlength="3" maxlength="11" required pattern="[-+]?[0-9]*[.,]?[0-9]+" title="Ingrese Telefono valido">
                 <label class="lblFlotante" data-content="Telefono"></label>
-                <input asp-for="Email" class="form-control tbFlotante" type="email" placeholder="" minlength="5" maxlength="30" required>
-                <label class="lblFlotante" data-content="E-Mail"></label>
-                <input asp-for="Clave" class="form-control tbFlotante" type="password" placeholder="" minlength="5" maxlength="20" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" title="La Contraseña debe contener al menos una letra en MAYÚSCULA y un NUMERO">
-                <label class="lblFlotante" data-content="Contraseña"></label>
-                <div class="row">
-                    <label class="col-form-label col-sm-2 pt-0">Genero:</label>
-                    <div class="col-sm-15">
-                        <div class="custom-control custom-radio">
-                            <input type="radio" class="custom-control-input" id="gHombre" name="rbSexo" @*required*@>
-                            <label class="custom-control-label" for="gHombre">Hombre</label>
-                        </div>
-                        <div class="custom-control custom-radio">
-                            <input type="radio" class="custom-control-input" id="gMujer" name="rbSexo" @*required*@>
-                            <label class="custom-control-label" for="gMujer">Mujer</label>
-                            <div class="invalid-feedback">Eres Hombre o Mujer?</div>
-                        </div>
-                    </div>
-                </div>
+                <input asp-for="Email" class="form-control tbFlotante" type="text" placeholder="" minlength="3" maxlength="11" required pattern="[-+]?[0-9]*[.,]?[0-9]+" title="Ingrese Telefono valido">
+                <label class="lblFlotante" data-content="Email"></label>
             </div>
             <button type="submit" value="Create" name="registro" class="button  btn-lg">Registrarse</button>
             <hr>

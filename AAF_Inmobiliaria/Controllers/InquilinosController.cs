@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AAF_Inmobiliaria.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 
 namespace AAF_Inmobiliaria.Controllers
 {
+    [Authorize]
     public class InquilinosController : Controller
     {
         private readonly IConfiguration configuracion;        private readonly RepositorioInquilino repositorioInquilino;        public InquilinosController(IConfiguration configuration)        {            this.configuracion = configuration;            repositorioInquilino = new RepositorioInquilino(configuration);        }
